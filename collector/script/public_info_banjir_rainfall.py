@@ -11,14 +11,13 @@ import csv
 import os
 
 
-
 # Set up Edge WebDriver
 edge_driver_path = r"D:\PyCode\msedgedriver.exe"
 service = Service(executable_path=edge_driver_path)
 driver = webdriver.Edge(service=service)
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-output_dir = os.path.join(current_dir, '..', 'output', 'rainfall')
+output_dir = os.path.join(current_dir, "..", "output", "rainfall")
 os.makedirs(output_dir, exist_ok=True)
 
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -56,6 +55,7 @@ def get_soup(driver, url, element_id):
     except:
         print(f"❌ Failed to load {url}")
         return None
+
 
 # --------- RAINFALL DATA ----------
 
@@ -117,7 +117,6 @@ for state in states:
 
 rf_csv_file = os.path.join(output_dir, f"rainfall_data_{timestamp}.csv")
 rf_json_file = os.path.join(output_dir, f"rainfall_data_{timestamp}.json")
-
 
 
 with open(rf_csv_file, "w", newline="", encoding="utf-8") as f:
