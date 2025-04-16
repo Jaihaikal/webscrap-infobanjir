@@ -6,9 +6,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import pandas as pd
 import csv
+from datetime import datetime, timedelta
+
 
 # Set up Edge WebDriver
-edge_driver_path = r"D:\Program Files\EdgeDriver\msedgedriver.exe"
+edge_driver_path = r"D:\PyCode\msedgedriver.exe"
 service = Service(executable_path=edge_driver_path)
 driver = webdriver.Edge(service=service)
 
@@ -97,10 +99,11 @@ print("✅ Done! water level data")
 # --------- RAINFALL DATA ----------
 
 rainfall_data = []
-
+today = datetime.today()
+rain_days = [(today - timedelta(days=i)).strftime("%d %b %Y") for i in range(5, 0, -1)]
 rf_headers = [
     "No", "Station ID", "Station Name", "State", "District", "Last Update", "Type",
-    "Rain 10 Apr", "Rain 11 Apr", "Rain 12 Apr", "Rain 13 Apr", "Rain 14 Apr", "Rain 15 Apr",
+    "Rain 10 Apr", ] + rain_days + [ 
     "Rain Since Midnight", "Rain Last Hour"
 ]
 for state in states:
